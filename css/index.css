@@ -1,0 +1,450 @@
+
+/*
+MAX HEIGHT OF BUTTONS : 70px
+MED HEIGHT OF BUTTONS : 55px
+SMALL HEIGHT OF BUTTONS : 40px
+*/
+
+
+:root {
+  --darkmode-text-color: #6495ed;
+
+  --small-button-size: 45px;
+  --medium-button-size: 55px;
+  --big-button-size: 65px;
+
+  --sidebar-expanded-big: 250px;
+  /* Bottom one gonna be used for mobile */
+  --sidebar-expanded-small: 250px;
+
+  --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
+  --align-relatives-fromsidenav: 10px;
+  /* First note's height or first one of the 6 note's maximum height need to set to here. */
+  --notes-totalnoteheight: 136px;
+}
+
+
+* {
+    box-sizing: border-box;
+    outline: 1px solid transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #16191f;
+  color:white;
+}
+
+::-webkit-scrollbar {
+  height: 15px;
+  width: 15px;
+  overflow: visible;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(64, 82, 163, 0.3);
+  border: solid transparent;
+  background-clip: padding-box;
+}
+
+svg{
+  color: rgba(255,255,255,0.87);
+}
+
+.make_sticky{
+  top: 0;
+  width: 100%;
+  position: sticky;
+}
+
+.make_sticky-vertical{
+  top: calc(var(--big-button-size) + 1px);
+
+  position: fixed;
+}
+
+.topnav_content{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  max-height: var(--big-button-size);
+}
+
+.vertical_content{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.horizontal_content{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.align_toleft{
+  margin-right: auto;
+}
+
+.align_toright{
+  margin-left: auto;
+}
+
+/*
+.button_align-toleft{
+  position:absolute;
+  left: 0;
+  top: -3px;
+}
+
+.button_align-toright
+{
+  position:absolute;
+  right: 0;
+  top: -3px;
+}*/
+
+.button_hover:hover{
+  background-color:#43475080;
+}
+
+.button_stickyhover{
+  background-color:#43475080;
+}
+
+.button_defaultsize{
+  width: var(--small-button-size);
+  height: var(--small-button-size);
+}
+
+.button_mediumsize{
+  width: var(--medium-button-size);;
+  height: var(--medium-button-size);
+}
+
+.button_bigsize{
+  width: var(--big-button-size);
+  height: var(--big-button-size);
+}
+
+/* ---------------------------- TOP NAVBAR START ----------------------- */
+
+.topnav {
+    /* background-color: #282c34; */
+    z-index: 999;
+    background-color: #16191f;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+    border-bottom: 1px solid #282c34;
+}
+
+/* .topnav a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: calc(7px + 2vmin);
+} */
+
+.search-container {
+  position: absolute;
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  /* margin-top: 20px; IF U WILL OPEN RELATIVE BACK*/
+  height: 40px;
+  border-radius: 4px;
+  width: 50vw;
+
+  /* ADDED FOR POS ABSOLUTE. CHANGE IT TO RELATIVE IF U WANNA GET FUCKED BY ALIGNING SHITS */
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.input_text{
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-style: none;
+  font-size:medium;
+  outline: none;
+  cursor: text;
+}
+
+#cl_search-input_text{
+  height: 100%;
+  width: 75%;
+  border-bottom:1px solid #454c5c;
+  transition: font-size 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+#cl_search-input_text:focus{
+  font-size:large;
+}
+
+.input_text::placeholder {
+    color: rgba(255, 255, 255, 0.63);
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+/* Role used because if we use textarea this not gonna get used. */
+.cl_textarea[contenteditable][role="textarea"]:empty::before {
+  content: attr(placeholder);
+  color: rgba(255, 255, 255, 0.63);
+  letter-spacing: 2px;
+  font-weight: 500;
+  cursor: text;
+}
+
+/* @media only screen and (max-width: 768px) {
+  .topnav .search-container {
+    float: none;
+  }
+} */
+
+
+.searcher{
+  position: absolute;
+  border-radius: 50%;
+  border-style: none;
+  width: var(--small-button-size);
+  height: var(--small-button-size);
+  background-color: transparent;
+}
+
+.cl_button{
+  border-radius: 50%;
+  padding: 12px;
+  overflow: hidden;
+  background: #ff2b35;
+  cursor: pointer;
+  /* user-select: none; */
+  /* fix button breaking when something fades out like addnote area */
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.personal-account{
+  overflow: hidden;
+  border-radius: 50%;
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 1);
+  border: 1px solid rgba(255, 0, 0, 0);
+}
+
+.personal-account:hover{
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.personal-account img{
+  object-fit: cover;
+  /* max-width: 120%; */
+  max-height: 130%;
+}
+
+
+
+/* ---------------------------- TOP NAVBAR END ----------------------- */
+
+
+
+/* ---------------------------- SIDE NAVBAR END ----------------------- */
+.sidenav {
+  /* Mobil versiyonlar icin problem yaratacak fixlenmesi gerek IMPORTANT */
+  height: calc(100% - (var(--big-button-size)));
+  width: var(--big-button-size);
+  z-index: 1;
+  /* background-color: rgba(201, 201, 201, 0.363); */
+  background-color: #16191f;
+  overflow-x: hidden;
+  transition: 0.5s;
+  border-right: 1px solid #282c34;
+  /* biraz arastirdiktan sonra outline olmasının animasyonları buga soktugunu ogrendim ve eger bu kod kalkarsa olacaklar her animasyon oynadıgında borderda bir cizgi cikar. */
+  /*outline: 1px solid transparent;*/
+}
+
+.sidenav .cl_button{
+  /* padding: 8px 8px 8px var(--big-button-size); */
+  transition: 0.4s;
+}
+
+.sidenav-hover{
+  transition-delay: 0.2s;
+  width: var(--sidebar-expanded-big);
+}
+
+.sidenav-expanded{
+  width: var(--sidebar-expanded-big);
+}
+
+.sidenav-expandinside{
+  width: 100%;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.sidenav .svg_big{
+  width: 41px;
+  height: 41px;
+  float: left;
+}
+
+/* INITIALIZE TEXTAREAS */
+.cl_textarea{
+  border: none;
+  width: 100%;
+  /* padding: 0; */
+  /* margin: 3px 10px; */
+  transition: none;
+  text-align: left;
+  overflow: hidden;
+  text-rendering:optimizeSpeed;
+  word-wrap: break-word;
+  height: auto;
+  /* For textarea */
+  resize: none;
+}
+
+
+
+
+/* NOTE ADDER */
+
+/* ---------------Main scroller------------ */
+#cl_notesarea{
+  /* ADDITIONAL POSITION SET */
+  position: relative;
+  display:grid;
+  grid-template-rows: 150px auto;
+  /* MAYBE IT CAN WORK grid-template-columns: calc(100vw - var(--align-relatives-fromsidenav)); */
+  justify-items: left;
+  row-gap: 10px;
+  margin-left: var(--align-relatives-fromsidenav);
+  width: calc(100vw - var(--align-relatives-fromsidenav));
+  height: calc(100% - (var(--align-relatives-fromtopnav)));
+}
+
+#cl_addnotearea
+{
+  position: relative;
+  display: flex;
+  /* Default was center */
+  /* This forces the the text in absolute position div to center  */
+  /* IMPORTANT  use flexend if u want a cute animation*/
+  justify-content: flex-start;
+  /* align-items: center; */
+  flex-direction: column;
+  width: 70%;
+  min-height: 40px;
+  border:1px solid #454c5c;
+  border-radius: 7px;
+  margin: auto;
+  transition: all 700ms;
+  overflow: hidden;
+  /* ALIGN TO THE CENTER OF SCREEN WITH TRANSFORM */
+  /* transform: translateX(calc((-1 * var(--align-relatives-fromsidenav))/2)); */
+}
+
+.cl_addnote-content{
+  width: 100%;
+  height: auto;
+  transition: opacity 700ms;
+}
+
+/* NOTE ADDER ENDS */
+
+
+/* NOTE SHOW STARTS */
+
+.cl_shownotes{
+  position: relative;
+  display: flex;
+  /* Depends on what usage u want :D */
+  /* justify-content:center; */
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-flow: row wrap;
+  flex: 1 1 auto;
+  width: 100%;
+  height: auto;
+}
+
+/* NOTE SHOW ENDS */
+
+
+/* NOTE STYLIZATION STARTS */
+.cl_note{
+  position: relative;
+  width: 400px;
+  border:1px solid #454c5c;
+  text-align: left;
+  padding: 20px;
+  border-radius: 7px;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.cl_note-title{
+  /* Need to set an variable for that. */
+  width: 360px;
+}
+
+/* .cl_note-title::after{
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 360px;
+  margin-left: 15px;
+  left: 0;
+  top: 60px;
+  border-top: 1px solid #454c5c;
+  border-radius: 20px;
+} */
+
+.cl_note-message{
+  /* Need to set an variable for that. */
+  width: 360px;
+  /* overflow: hidden; */
+  border-top: 1px solid #454c5c;
+}
+
+/* NOTE STYLIZATION eNDS */
+
+
+.container {
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.hide{
+  display: none;
+  opacity: 0;
+}
+
+
+
+
+
+  /* Extra small devices (phones, 600px and down)
+@media only screen and (max-width: 600px) {...}
+
+ Small devices (portrait tablets and large phones, 600px and up)
+@media only screen and (min-width: 600px) {...}
+
+ Medium devices (landscape tablets, 768px and up)
+@media only screen and (min-width: 768px) {...}
+
+ Large devices (laptops/desktops, 992px and up)
+@media only screen and (min-width: 992px) {...}
+
+ Extra large devices (large laptops and desktops, 1200px and up)
+@media only screen and (min-width: 1200px) {...}*/
