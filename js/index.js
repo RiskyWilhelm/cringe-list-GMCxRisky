@@ -7,7 +7,7 @@
 var currentsize = getComputedStyle(document.documentElement).getPropertyValue('--big-button-size');
 // Get root element and set margin of left side by button sizes
 document.documentElement.style.setProperty("--align-relatives-fromsidenav", currentsize);
-var timeouthalf, currentSelection, clickedElement, timeout_addnote, timeout_addnoteClearAnimation, i, notetemplate, lastnote = 1, lastContainerHeight = 0;
+var timeouthalf, currentSelection, clickedElement, timeout_addnote, timeout_addnoteClearAnimation, timeout_resizeBoxAnimation, i, notetemplate, lastnote = 1, lastContainerHeight = 0;
 var createnotetemplate = function(){
 notetemplate = $('<div>', {
     class: 'cl_note'
@@ -50,6 +50,7 @@ window.onload=function(){
     {
       $('#cl_sidenav').addClass("sidenav-expanded");
       $(this).attr("is-expanded", "true");
+      $('#cl_sidenav').find(".cl_button").addClass("sidenav-expandinside");
       // Root elementini alıyoruz. Documentelement bu yuzden kullandık.
       document.documentElement.style.setProperty("--align-relatives-fromsidenav", (getComputedStyle(document.documentElement).getPropertyValue("--sidebar-expanded-big")));
     }
@@ -57,26 +58,20 @@ window.onload=function(){
     {
       $('#cl_sidenav').removeClass("sidenav-expanded");
       $(this).attr("is-expanded", "false");
+      $('#cl_sidenav').find(".cl_button").removeClass("sidenav-expandinside");
       document.documentElement.style.setProperty("--align-relatives-fromsidenav", (getComputedStyle(document.documentElement).getPropertyValue("--big-button-size")));
     }
   });
 
   $('#cl_sidenav').hover(function(){
-    // animasyon icin timeout testleri
-    //clearTimeout(timeouthalf);
-    currentSelection = $(this).find(".cl_button");
-    // timeouthalf = setTimeout(function(e) {
-    //   $('#cl_sidenav').addClass("sidenav-expanded");
-    //   currentSelection.addClass("sidenav-expandinside");
-    // }, 200);
-    $('#cl_sidenav').addClass("sidenav-expanded");
-    currentSelection.addClass("sidenav-expandinside");
+    $(this).addClass("sidenav-expanded");
+    $(this).find(".cl_button").addClass("sidenav-expandinside");
   },
   function(){
     if($("#cl_menu").attr("is-expanded") != "true"){
       //clearTimeout(timeouthalf);
-      $('#cl_sidenav').removeClass("sidenav-expanded");
-      currentSelection.removeClass("sidenav-expandinside");
+      $(this).removeClass("sidenav-expanded");
+      $(this).find(".cl_button").removeClass("sidenav-expandinside");
     }
   });
 
@@ -143,7 +138,7 @@ window.onload=function(){
     // Set note height and make them animateable!
     addDummy(noteattritubes[3], defaultDuration);
 
-    $('textarea').on('input paste', function(){
+    $('textarea').on('input paste change', function(){
       this.style.height = 'auto';
       this.style.height = (this.scrollHeight) + 'px';
     });
@@ -202,6 +197,7 @@ window.onload=function(){
       // Normal
       // dummyDiv.style.width = rect.width + 'px';
       // dummyDiv.style.height = rect.height + 'px';
+      dummyDiv.id = 'dummy-' + item.id;
       dummyDiv.style.width = rect.width + notegap +  'px';
       dummyDiv.style.height = rect.height + notegap + 'px';
       dummyDiv.style.visibility = 'hidden';
@@ -252,7 +248,7 @@ window.onload=function(){
       return false;
   });
 
-  $('textarea').on('input paste', function(){
+  $('textarea').on('input paste change', function(){
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
   });

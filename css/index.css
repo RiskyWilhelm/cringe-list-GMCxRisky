@@ -9,6 +9,8 @@ SMALL HEIGHT OF BUTTONS : 40px
 :root {
   --darkmode-text-color: #6495ed;
 
+  --addnote-maxheight: 150px;
+
   --small-button-size: 45px;
   --medium-button-size: 55px;
   --big-button-size: 65px;
@@ -156,7 +158,9 @@ svg{
 
 .search-container {
   position: absolute;
-  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  /* transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2); */
+  /* Bottom one is good lol */
+  /* transition: width 500ms cubic-bezier(0, 0.5, 0.35, 1); */
   /* margin-top: 20px; IF U WILL OPEN RELATIVE BACK*/
   height: 40px;
   border-radius: 4px;
@@ -181,26 +185,17 @@ svg{
   height: 100%;
   width: 75%;
   border-bottom:1px solid #454c5c;
-  transition: font-size 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  /* transition: font-size 500ms cubic-bezier(0, 0.110, 0.35, 2); */
 }
 
-#cl_search-input_text:focus{
+/* #cl_search-input_text:focus{
   font-size:large;
-}
+} */
 
 .input_text::placeholder {
     color: rgba(255, 255, 255, 0.63);
     letter-spacing: 2px;
     font-weight: 500;
-}
-
-/* Role used because if we use textarea this not gonna get used. */
-.cl_textarea[contenteditable][role="textarea"]:empty::before {
-  content: attr(placeholder);
-  color: rgba(255, 255, 255, 0.63);
-  letter-spacing: 2px;
-  font-weight: 500;
-  cursor: text;
 }
 
 /* @media only screen and (max-width: 768px) {
@@ -320,7 +315,7 @@ svg{
   /* ADDITIONAL POSITION SET */
   position: relative;
   display:grid;
-  grid-template-rows: 150px auto;
+  grid-template-rows: var(--addnote-maxheight) auto;
   /* MAYBE IT CAN WORK grid-template-columns: calc(100vw - var(--align-relatives-fromsidenav)); */
   justify-items: left;
   row-gap: 10px;
@@ -339,12 +334,13 @@ svg{
   justify-content: flex-start;
   /* align-items: center; */
   flex-direction: column;
-  width: 70%;
+  width: 67.65vw;
   min-height: 40px;
   border:1px solid #454c5c;
   border-radius: 7px;
   margin: auto;
-  transition: all 700ms;
+  /* transition: height 500ms cubic-bezier(0.2, 0.5, 0.35, 1), width 500ms cubic-bezier(0.2, 0.5, 0.35, 1); */
+  transition: height 700ms;
   overflow: hidden;
   /* ALIGN TO THE CENTER OF SCREEN WITH TRANSFORM */
   /* transform: translateX(calc((-1 * var(--align-relatives-fromsidenav))/2)); */
@@ -435,16 +431,80 @@ svg{
 
 
   /* Extra small devices (phones, 600px and down)
-@media only screen and (max-width: 600px) {...}
+@media only screen and (max-width: 600px) {...}*/
 
- Small devices (portrait tablets and large phones, 600px and up)
-@media only screen and (min-width: 600px) {...}
+ /*Small devices (portrait tablets and large phones, 600px and up)
+@media only screen and (min-width: 600px) {...}*/
 
- Medium devices (landscape tablets, 768px and up)
-@media only screen and (min-width: 768px) {...}
+ /*Medium devices (landscape tablets, 768px and up)
+@media only screen and (min-width: 768px) {...}*/
+@media only screen and (max-width: 768px) {
+  :root {
+    --darkmode-text-color: #6495ed;
 
- Large devices (laptops/desktops, 992px and up)
-@media only screen and (min-width: 992px) {...}
+    --addnote-maxheight: 280px;
 
- Extra large devices (large laptops and desktops, 1200px and up)
+    --small-button-size: 45px;
+    --medium-button-size: 55px;
+    --big-button-size: 65px;
+
+    --sidebar-expanded-big: 250px;
+    /* Bottom one gonna be used for mobile */
+    --sidebar-expanded-small: 250px;
+
+    --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
+    --align-relatives-fromsidenav: 10px;
+    /* First note's height or first one of the 6 note's maximum height need to set to here. */
+    --notes-totalnoteheight: 136px;
+  }
+}
+
+
+ /*Large devices (laptops/desktops, 992px and up)
+@media only screen and (min-width: 992px) {...}*/
+@media only screen and (max-width: 992px) {
+  :root {
+    --darkmode-text-color: #6495ed;
+
+    --addnote-maxheight: 280px;
+
+    --small-button-size: 45px;
+    --medium-button-size: 55px;
+    --big-button-size: 65px;
+
+    --sidebar-expanded-big: 250px;
+    /* Bottom one gonna be used for mobile */
+    --sidebar-expanded-small: 250px;
+
+    --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
+    --align-relatives-fromsidenav: 10px;
+    /* First note's height or first one of the 6 note's maximum height need to set to here. */
+    --notes-totalnoteheight: 136px;
+  }
+}
+
+
+
+ /*Extra large devices (large laptops and desktops, 1200px and up)
 @media only screen and (min-width: 1200px) {...}*/
+
+@media only screen and (max-width: 1200px) {
+  :root {
+    --darkmode-text-color: #6495ed;
+
+    --addnote-maxheight: 280px;
+
+    --small-button-size: 45px;
+    --medium-button-size: 55px;
+    --big-button-size: 65px;
+
+    --sidebar-expanded-big: 250px;
+    /* Bottom one gonna be used for mobile */
+    --sidebar-expanded-small: 250px;
+
+    --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
+    --align-relatives-fromsidenav: 10px;
+    /* First note's height or first one of the 6 note's maximum height need to set to here. */
+    --notes-totalnoteheight: 136px;
+  }
+}
