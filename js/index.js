@@ -84,7 +84,7 @@ window.onload=function(){
   $('#cl_addnote-titletext').focus(function(){
     clearTimeout(timeout_addnote);
     $('#cl_addnote-message').css("opacity", 1);
-    $('#cl_addnotearea').height("125px");
+    $('#cl_addnotearea').height("113px");
     timeout_addnoteClearAnimation = setTimeout(function(){
       $('#cl_addnotearea').removeAttr("style");
     }, 500);
@@ -97,8 +97,9 @@ window.onload=function(){
       {
         $('#cl_addnote-message').css("opacity", 0);
         clearTimeout(timeout_addnoteClearAnimation);
-        $('#cl_addnotearea').height("125px");
-        $('#cl_addnotearea').height("40px");
+        $('#cl_addnotearea').height("112px");
+        // 125px normal
+        $('#cl_addnotearea').height("38px");
         timeout_addnote = setTimeout(function() {
             $('#cl_addnote-message').addClass("hide");
             console.log("WORKS");
@@ -117,8 +118,8 @@ window.onload=function(){
         console.log($('#cl_addnote-messagetext').val(), $('#cl_addnote-titletext').val());
 
         $('#cl_addnote-message').css("opacity", 0);
-        $('#cl_addnotearea').height("125px");
-        $('#cl_addnotearea').height("40px");
+        $('#cl_addnotearea').height("112px");
+        $('#cl_addnotearea').height("38px");
         timeout_addnote = setTimeout(function() {
             $('#cl_addnote-message').addClass("hide");
             console.log("WORKS");
@@ -156,10 +157,8 @@ window.onload=function(){
 
 
   // ANIMATION CODES https://codepen.io/hideya/pen/Jamabx Changed in this project by - Yunus Yıldız
-  var targetClassName = 'flex-wrap-anim';
-  var defaultDuration = '0.3s';
+  var targetClassName = 'flex-wrap-anim', defaultDuration = '0.3s', notegap=10;
   // top left right bottom
-
   var dummyList = [];
   // get all notes in the window
   function addDummy(item, duration) {
@@ -174,8 +173,11 @@ window.onload=function(){
       var dummyDiv = document.createElement('div');
       dummyDiv.classList.add(targetClassName + '-dummy');
       var rect = item.getBoundingClientRect();
-      dummyDiv.style.width = rect.width + 'px';
-      dummyDiv.style.height = rect.height + 'px';
+      // Normal
+      // dummyDiv.style.width = rect.width + 'px';
+      // dummyDiv.style.height = rect.height + 'px';
+      dummyDiv.style.width = rect.width + notegap +  'px';
+      dummyDiv.style.height = rect.height + notegap + 'px';
       dummyDiv.style.visibility = 'hidden';
       dummyDiv['__' + targetClassName + '_pair'] = item;
       dummyDiv['__' + targetClassName + '_duration'] = duration;
