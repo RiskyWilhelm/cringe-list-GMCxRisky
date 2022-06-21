@@ -16,13 +16,6 @@ $('<div>', {
     class: 'cl_note-title'
 }).appendTo(notetemplate);
 
-// $('<textarea>', {
-//     class: 'input_text cl_textarea noEnter',
-//     placeholder: 'Title',
-//     maxlength: '75',
-//     style: 'font-size:large; margin:0; padding-right:20px;'
-// }).appendTo($(notetemplate).find('.cl_note-title'));
-
 $('<textarea>', {
     class: 'input_text cl_textarea noEnter',
     placeholder: 'Title',
@@ -139,10 +132,11 @@ window.onload=function(){
   $('#cl_addnote-button').click(function(){
     var noteattritubes = [$('#cl_addnote-titletext').val(), $('#cl_addnote-messagetext').val(), notetemplate, ""];
     noteattritubes[2] = $(notetemplate).clone();
+    //  We would get all textareas inside of those divs and select it with [] but NO DUDE its still in development mode
     $(noteattritubes[2]).find('.cl_note-title').find('textarea').val(noteattritubes[0]);
     $(noteattritubes[2]).find('.cl_note-message').find('textarea').val(noteattritubes[1]);
     $(noteattritubes[2]).attr('id', "cl_note-" + lastnote);
-    $(noteattritubes[2]).appendTo($('#cl_shownotesarea'));
+    $(noteattritubes[2]).prependTo($('#cl_shownotesarea'));
     // Lastnote was set to 1 so we need to make that empty fr!!!!!!!!!
     noteattritubes[3] = $('#cl_note-' + lastnote);
     noteattritubes[3] = document.getElementById('cl_note-' + lastnote);
@@ -153,6 +147,21 @@ window.onload=function(){
       this.style.height = 'auto';
       this.style.height = (this.scrollHeight) + 'px';
     });
+
+    // Put it on right area
+    dummyList.forEach(function(dummyDiv) {
+      var item = dummyDiv['__' + targetClassName + '_pair'];
+      var duration = dummyDiv['__' + targetClassName + '_duration'];
+      if (item.offsetTop != dummyDiv.offsetTop) {
+        item.style.transition = 'all ' + duration;
+        item.style.top = dummyDiv.offsetTop + 'px';
+        item.style.left = dummyDiv.offsetLeft + 'px';
+      } else {
+        item.style.transition = '';
+        item.style.left = dummyDiv.offsetLeft + 'px';
+      }
+    });
+
     lastnote++;
   });
 
