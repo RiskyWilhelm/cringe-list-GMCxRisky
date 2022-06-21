@@ -16,6 +16,13 @@ $('<div>', {
     class: 'cl_note-title'
 }).appendTo(notetemplate);
 
+// $('<textarea>', {
+//     class: 'input_text cl_textarea noEnter',
+//     placeholder: 'Title',
+//     maxlength: '75',
+//     style: 'font-size:large; margin:0; padding-right:20px;'
+// }).appendTo($(notetemplate).find('.cl_note-title'));
+
 $('<textarea>', {
     class: 'input_text cl_textarea noEnter',
     placeholder: 'Title',
@@ -33,7 +40,7 @@ $('<textarea>', {
     maxlength: '300',
     style: 'font-size:large; margin:0; padding-right:20px;'
 }).appendTo($(notetemplate).find('.cl_note-message'));
-console.log("Note initalization: Success");
+console.log("Note Initalization: Success");
 };
 
 createnotetemplate();
@@ -141,6 +148,11 @@ window.onload=function(){
     noteattritubes[3] = document.getElementById('cl_note-' + lastnote);
     // Set note height and make them animateable!
     addDummy(noteattritubes[3], defaultDuration);
+
+    $('textarea').on('input paste', function(){
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+    });
     lastnote++;
   });
 
@@ -151,6 +163,11 @@ window.onload=function(){
       return 1;
     }
     return 0;
+  }
+
+  function autogrow(){
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
   }
 
 
@@ -226,8 +243,7 @@ window.onload=function(){
       return false;
   });
 
-  $('textarea').on('input paste', function(e){
-    console.log("INPUTE");
+  $('textarea').on('input paste', function(){
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
   });
