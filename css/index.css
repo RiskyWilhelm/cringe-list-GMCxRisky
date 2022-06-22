@@ -6,7 +6,7 @@ SMALL HEIGHT OF BUTTONS : 40px
 */
 
 
-:root {
+/* :root {
   --darkmode-text-color: #6495ed;
 
   --small-button-size: 45px;
@@ -14,14 +14,14 @@ SMALL HEIGHT OF BUTTONS : 40px
   --big-button-size: 65px;
 
   --sidebar-expanded-big: 250px;
-  /* Bottom one gonna be used for mobile */
+   Bottom one gonna be used for mobile
   --sidebar-expanded-small: 250px;
 
   --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
   --align-relatives-fromsidenav: 10px;
-  /* First note's height or first one of the 6 note's maximum height need to set to here. */
+   First note's height or first one of the 6 note's maximum height need to set to here.
   --notes-totalnoteheight: 136px;
-}
+} */
 
 
 * {
@@ -228,7 +228,7 @@ svg{
   overflow: hidden;
   background: #ff2b35;
   cursor: pointer;
-  /* user-select: none; */
+  user-select: none;
   /* fix button breaking when something fades out like addnote area */
   -webkit-flex: 0 0 auto;
   flex: 0 0 auto;
