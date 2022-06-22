@@ -77,13 +77,16 @@ window.onload=function(){
 
 // Addnote area Animations!
   $('#cl_addnote-titletext').focus(function(){
-    clearTimeout(timeout_addnote);
-    $('#cl_addnote-message').css("opacity", 1);
-    $('#cl_addnotearea').height("113px");
-    timeout_addnoteClearAnimation = setTimeout(function(){
-      $('#cl_addnotearea').removeAttr("style");
-    }, 500);
-    $('#cl_addnote-message').removeClass("hide");
+    if((checkifEmpty('#cl_addnote-messagetext') && checkifEmpty('#cl_addnote-titletext')))
+    {
+      clearTimeout(timeout_addnote);
+      $('#cl_addnote-message').css("opacity", 1);
+      $('#cl_addnotearea').height("113px");
+      timeout_addnoteClearAnimation = setTimeout(function(){
+        $('#cl_addnotearea').removeAttr("style");
+      }, 500);
+      $('#cl_addnote-message').removeClass("hide");
+    }
   })
   .focusout(function()
   {
@@ -189,7 +192,6 @@ window.onload=function(){
       item.style.position = 'absolute';
       item.style.top = top + 'px';
       item.style.left = left + 'px';
-      console.log('Created Dummy of: ', item);
 
       var dummyDiv = document.createElement('div');
       dummyDiv.classList.add(targetClassName + '-dummy');
@@ -203,7 +205,8 @@ window.onload=function(){
       dummyDiv.style.visibility = 'hidden';
       dummyDiv['__' + targetClassName + '_pair'] = item;
       dummyDiv['__' + targetClassName + '_duration'] = duration;
-      item.parentNode.appendChild(dummyDiv);
+      //item.parentNode.appendChild(dummyDiv);
+      /* added in mobile */ item.parentNode.prepend(dummyDiv);
       dummyList.push(dummyDiv);
 
     }, 0);
@@ -253,57 +256,5 @@ window.onload=function(){
     this.style.height = (this.scrollHeight) + 'px';
   });
 
-  // Initialize height by content
-  function initializeHeightByContent(){
-    setTimeout(
-      function(){
-        console.log("Initialized Height By Content: Success");
-        i = 0;
-        dummyList.forEach(function(dummyDiv) {
-          var item = dummyDiv['__' + targetClassName + '_pair'];
-          var duration = dummyDiv['__' + targetClassName + '_duration'];
-          if (item.offsetTop != dummyDiv.offsetTop) {
-            item.style.transition = 'all ' + duration;
-            item.style.top = dummyDiv.offsetTop + 'px';
-            item.style.left = dummyDiv.offsetLeft + 'px';
-          } else {
-            item.style.transition = '';
-            item.style.left = dummyDiv.offsetLeft + 'px';
-          }
-          i++;
-        });
-      }, 0);
-  }
-
-  //initializeHeightByContent();
   console.log("Animation Initialization: Success");
 }
-
-
-
-
-
-// UNOPTIMIZED bunlar jquery olmadan yapılanı ancak zor geldigi icin jquery kullanmaya karar verdim.
-// window.addEventListener('click', function(e){
-//   if (!document.getElementById('cl_sidenav').contains(e.target) && !(document.getElementById('cl_menu').getAttribute("is-expanded") == "false")){
-//     console.log("if WORKED");
-//     document.getElementById('cl_menu').setAttribute("is-expanded", "false");
-//     $("#cl_sidenav").removeClass("sidenav-expanded");
-//   }
-
-//   else if(!document.getElementById('cl_menu').contains(e.target) && !document.getElementById('cl_sidenav').contains(e.target)){
-//     console.log("ELSE IF WORKED");
-//     $("#cl_sidenav").removeClass("sidenav-expanded");
-//   }
-
-//   else if(document.getElementById('cl_sidenav').contains(e.target))
-//   {
-//     console.log("A");
-//   }
-
-//   else{
-//     console.log("ELSE WORKED");
-//     document.getElementById('cl_menu').setAttribute("is-expanded", "true");
-//     $("#cl_sidenav").addClass("sidenav-expanded");
-//   }
-// });
