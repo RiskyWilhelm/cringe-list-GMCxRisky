@@ -7,7 +7,7 @@
 var currentsize = getComputedStyle(document.documentElement).getPropertyValue('--big-button-size');
 // Get root element and set margin of left side by button sizes
 document.documentElement.style.setProperty("--align-relatives-fromsidenav", currentsize);
-var timeouthalf, currentSelection, clickedElement, timeout_addnote, timeout_addnoteClearAnimation, timeout_resizeBoxAnimation, i, notetemplate, lastnote = 1, lastContainerHeight = 0;
+var timeouthalf, currentSelection, clickedElement, timeout_addnote, timeout_addnoteClearAnimation, timeout_resizeBoxAnimation, timeout_resizeTextInitialization, i, notetemplate, lastnote = 1, lastContainerHeight = 0;
 var createnotetemplate = function(){
 notetemplate = $('<div>', {
     class: 'cl_note'
@@ -100,7 +100,6 @@ window.onload=function(){
         $('#cl_addnotearea').height("38px");
         timeout_addnote = setTimeout(function() {
             $('#cl_addnote-message').addClass("hide");
-            console.log("WORKS");
         }, 500);
       }
     }, 100);
@@ -113,14 +112,11 @@ window.onload=function(){
     setTimeout(function() {
       if(!(clickedElement.target.id == 'cl_addnote-titletext') && (checkifEmpty('#cl_addnote-messagetext') && checkifEmpty('#cl_addnote-titletext')))
       {
-        console.log($('#cl_addnote-messagetext').val(), $('#cl_addnote-titletext').val());
-
         $('#cl_addnote-message').css("opacity", 0);
         $('#cl_addnotearea').height("112px");
         $('#cl_addnotearea').height("38px");
         timeout_addnote = setTimeout(function() {
             $('#cl_addnote-message').addClass("hide");
-            console.log("WORKS");
         }, 500);
       }
     }, 100);
@@ -134,16 +130,20 @@ window.onload=function(){
     $(noteattritubes[2]).find('.cl_note-title').find('textarea').val(noteattritubes[0]);
     $(noteattritubes[2]).find('.cl_note-message').find('textarea').val(noteattritubes[1]);
     $(noteattritubes[2]).attr('id', "cl_note-" + lastnote);
+
     $(noteattritubes[2]).prependTo($('#cl_shownotesarea'));
     // Lastnote was set to 1 so we need to make that empty fr!!!!!!!!!
     noteattritubes[3] = $('#cl_note-' + lastnote);
     noteattritubes[3] = document.getElementById('cl_note-' + lastnote);
+    $(noteattritubes[2]).find('textarea').each(function(){
+      autogrow(this);
+    });
+
     // Set note height and make them animateable!
     addDummy(noteattritubes[3], defaultDuration);
 
     $('textarea').on('input paste change', function(){
-      this.style.height = 'auto';
-      this.style.height = (this.scrollHeight) + 'px';
+      autogrow(this);
     });
 
     // Put it on right area
@@ -172,9 +172,9 @@ window.onload=function(){
     return 0;
   }
 
-  function autogrow(){
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
+  function autogrow(elem){
+    elem.style.height = 'auto';
+    elem.style.height = (elem.scrollHeight) + 'px';
   }
 
 
@@ -243,6 +243,17 @@ window.onload=function(){
         item.style.left = dummyDiv.offsetLeft + 'px';
       }
     });
+    clearTimeout(timeout_resizeTextInitialization);
+    timeout_resizeTextInitialization = setTimeout(function(){
+      $('textarea').each(function() {
+        if($(this).val().length > 0)
+        {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight) + 'px';
+        }
+      });
+      console.log("Texts resized as window size!");
+    }, 150);
   });
 
   // Initialize no enter in components like text inputs
@@ -252,8 +263,7 @@ window.onload=function(){
   });
 
   $('textarea').on('input paste change', function(){
-    this.style.height = 'auto';
-    this.style.height = (this.scrollHeight) + 'px';
+    autogrow(this);
   });
 
   console.log("Animation Initialization: Success");

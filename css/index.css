@@ -281,7 +281,19 @@ svg{
 
 .sidenav-expandinside{
   width: 100%;
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.sidenav .svg_default{
+  width: 21px;
+  height: 21px;
+  float: left;
+}
+
+.sidenav .svg_medium{
+  width: 31px;
+  height: 31px;
+  float: left;
 }
 
 .sidenav .svg_big{
