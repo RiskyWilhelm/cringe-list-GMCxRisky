@@ -86,8 +86,8 @@ svg{
   /* Center to middle with line height 0 is not working somehow lol */
   line-height: 0px;
   float: right;
-  opacity: 0;
-  transition: opacity 700ms;
+  transition: opacity 500ms;
+  font-size: medium;
 }
 
 .horizontal_content{
