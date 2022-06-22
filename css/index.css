@@ -9,8 +9,6 @@ SMALL HEIGHT OF BUTTONS : 40px
 :root {
   --darkmode-text-color: #6495ed;
 
-  --addnote-maxheight: 150px;
-
   --small-button-size: 45px;
   --medium-button-size: 55px;
   --big-button-size: 65px;
@@ -81,6 +79,15 @@ svg{
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.vertical_content .text{
+  display: inline-block;
+  /* Center to middle with line height 0 is not working somehow lol */
+  line-height: 0px;
+  float: right;
+  opacity: 0;
+  transition: opacity 700ms;
 }
 
 .horizontal_content{
@@ -284,6 +291,10 @@ svg{
   border-radius: 0px 10px 10px 0px;
 }
 
+.sidenav-expandinside .text{
+  opacity: 1;
+}
+
 .sidenav .svg_default{
   width: 21px;
   height: 21px;
@@ -390,7 +401,6 @@ svg{
 
 /* NOTE STYLIZATION STARTS */
 .cl_note{
-  position: relative;
   width: 400px;
   border:1px solid #454c5c;
   text-align: left;
@@ -453,73 +463,9 @@ svg{
 
  /*Medium devices (landscape tablets, 768px and up)
 @media only screen and (min-width: 768px) {...}*/
-@media only screen and (max-width: 768px) {
-  :root {
-    --darkmode-text-color: #6495ed;
-
-    --addnote-maxheight: 280px;
-
-    --small-button-size: 45px;
-    --medium-button-size: 55px;
-    --big-button-size: 65px;
-
-    --sidebar-expanded-big: 250px;
-    /* Bottom one gonna be used for mobile */
-    --sidebar-expanded-small: 250px;
-
-    --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
-    --align-relatives-fromsidenav: 10px;
-    /* First note's height or first one of the 6 note's maximum height need to set to here. */
-    --notes-totalnoteheight: 136px;
-  }
-}
-
 
  /*Large devices (laptops/desktops, 992px and up)
 @media only screen and (min-width: 992px) {...}*/
-@media only screen and (max-width: 992px) {
-  :root {
-    --darkmode-text-color: #6495ed;
-
-    --addnote-maxheight: 280px;
-
-    --small-button-size: 45px;
-    --medium-button-size: 55px;
-    --big-button-size: 65px;
-
-    --sidebar-expanded-big: 250px;
-    /* Bottom one gonna be used for mobile */
-    --sidebar-expanded-small: 250px;
-
-    --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
-    --align-relatives-fromsidenav: 10px;
-    /* First note's height or first one of the 6 note's maximum height need to set to here. */
-    --notes-totalnoteheight: 136px;
-  }
-}
-
-
 
  /*Extra large devices (large laptops and desktops, 1200px and up)
 @media only screen and (min-width: 1200px) {...}*/
-
-@media only screen and (max-width: 1200px) {
-  :root {
-    --darkmode-text-color: #6495ed;
-
-    --addnote-maxheight: 280px;
-
-    --small-button-size: 45px;
-    --medium-button-size: 55px;
-    --big-button-size: 65px;
-
-    --sidebar-expanded-big: 250px;
-    /* Bottom one gonna be used for mobile */
-    --sidebar-expanded-small: 250px;
-
-    --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
-    --align-relatives-fromsidenav: 10px;
-    /* First note's height or first one of the 6 note's maximum height need to set to here. */
-    --notes-totalnoteheight: 136px;
-  }
-}

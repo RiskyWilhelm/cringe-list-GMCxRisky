@@ -147,18 +147,21 @@ window.onload=function(){
     });
 
     // Put it on right area
-    dummyList.forEach(function(dummyDiv) {
-      var item = dummyDiv['__' + targetClassName + '_pair'];
-      var duration = dummyDiv['__' + targetClassName + '_duration'];
-      if (item.offsetTop != dummyDiv.offsetTop) {
-        item.style.transition = 'all ' + duration;
-        item.style.top = dummyDiv.offsetTop + 'px';
-        item.style.left = dummyDiv.offsetLeft + 'px';
-      } else {
-        item.style.transition = '';
-        item.style.left = dummyDiv.offsetLeft + 'px';
-      }
-    });
+    setTimeout(function(){
+      dummyList.forEach(function(dummyDiv) {
+        var item = dummyDiv['__' + targetClassName + '_pair'];
+        var duration = dummyDiv['__' + targetClassName + '_duration'];
+        if (item.offsetTop != dummyDiv.offsetTop) {
+          item.style.transition = 'all ' + duration;
+          item.style.top = dummyDiv.offsetTop + 'px';
+          item.style.left = dummyDiv.offsetLeft + 'px';
+        } else {
+          item.style.transition = '';
+          item.style.left = dummyDiv.offsetLeft + 'px';
+        }
+      });
+    }, 50);
+
 
     lastnote++;
   });
