@@ -309,7 +309,7 @@ svg{
   /* ADDITIONAL POSITION SET */
   position: relative;
   display:grid;
-  grid-auto-rows: minmax(150px, min-content);
+  grid-auto-rows: minmax(150px, max-content);
   grid-auto-flow: row;
   /* MAYBE IT CAN WORK grid-template-columns: calc(100vw - var(--align-relatives-fromsidenav)); */
   /* justify-items: center; */
@@ -317,6 +317,7 @@ svg{
   margin-left: var(--align-relatives-fromsidenav);
   width: calc(100vw - var(--align-relatives-fromsidenav));
   height: calc(100vh - (var(--align-relatives-fromtopnav)));
+  justify-content: center;
 }
 
 #cl_addnotearea
