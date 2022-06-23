@@ -309,7 +309,7 @@ svg{
   /* ADDITIONAL POSITION SET */
   position: relative;
   display:grid;
-  grid-auto-rows: minmax(150px, max-content);
+  grid-auto-rows: minmax(150px, max-content) 0;
   grid-auto-flow: row;
   /* MAYBE IT CAN WORK grid-template-columns: calc(100vw - var(--align-relatives-fromsidenav)); */
   /* justify-items: center; */
