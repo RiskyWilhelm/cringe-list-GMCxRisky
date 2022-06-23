@@ -176,11 +176,15 @@ window.onload=function(){
   }
 
   function autogrow(elem){
+    currentSelection = $(elem).closest('.cl_note');
+    if(currentSelection.length > 0 && currentSelection.height() != dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-cl_note-0' }))
+    {
+      console.log("last heights(dummy, textarea): ", currentSelection.height(), dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-cl_note-0' }));
+      console.log("FOUND AT ", currentSelection);
+    }
     elem.style.height = 'auto';
     elem.style.height = (elem.scrollHeight) + 'px';
   }
-
-
 
 
   // ANIMATION CODES https://codepen.io/hideya/pen/Jamabx Changed in this project by - Yunus Yıldız
@@ -199,13 +203,12 @@ window.onload=function(){
       var dummyDiv = document.createElement('div');
       dummyDiv.classList.add(targetClassName + '-dummy');
       var rect = item.getBoundingClientRect();
-      // Normal
-      // dummyDiv.style.width = rect.width + 'px';
-      // dummyDiv.style.height = rect.height + 'px';
-      dummyDiv.id = 'dummy-' + item.id;
       dummyDiv.style.width = rect.width + notegap +  'px';
       dummyDiv.style.height = rect.height + notegap + 'px';
       dummyDiv.style.visibility = 'hidden';
+
+      dummyDiv['__' + targetClassName + '_height'] = dummyDiv.style.height;
+      dummyDiv['__' + targetClassName + '_id'] = 'dummy-' + item.id;
       dummyDiv['__' + targetClassName + '_pair'] = item;
       dummyDiv['__' + targetClassName + '_duration'] = duration;
       //item.parentNode.appendChild(dummyDiv);
