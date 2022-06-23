@@ -4,9 +4,9 @@
 //
 // Note: If you put in onload, it not making the variable global. Instead, it becomes local.
 
-var currentsize = getComputedStyle(document.documentElement).getPropertyValue('--big-button-size');
+// var currentsize = getComputedStyle(document.documentElement).getPropertyValue('--big-button-size');
 // Get root element and set margin of left side by button sizes
-document.documentElement.style.setProperty("--align-relatives-fromsidenav", currentsize);
+// document.documentElement.style.setProperty("--align-relatives-fromsidenav", currentsize);
 var timeouthalf, currentSelection, clickedElement, timeout_addnote, timeout_addnoteClearAnimation, timeout_resizeBoxAnimation, timeout_resizeTextInitialization, i, notetemplate, lastnote = 1, lastContainerHeight = 0;
 var createnotetemplate = function(){
 notetemplate = $('<div>', {
@@ -43,7 +43,6 @@ window.onclick=function(e){
 }
 
 window.onload=function(){
-
   $("#cl_menu").click(function(e){
     // Basit bir taktikle c++ projelerimden ogrendigim bir toggle taktigini uyguladım. Ancak else yerine else if kullanılmalı ki targetin bu bizim menu oldugunu kanıtlayalım.
     if($(this).attr("is-expanded") == "false")
@@ -256,6 +255,7 @@ window.onload=function(){
       console.log("Texts resized as window size!");
     }, 150);
   });
+
 
   // Initialize no enter in components like text inputs
   $('.noEnter').keydown(function(e) {

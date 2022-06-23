@@ -11,11 +11,12 @@
   --sidebar-expanded-small: 250px;
 
   --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
-  --align-relatives-fromsidenav: 10px;
+  --align-relatives-fromsidenav: 65px;
   /* First note's height or first one of the 6 note's maximum height need to set to here. */
   --notes-totalnoteheight: 136px;
 }
 
+/* Fonts */
 .font-small{
   font-size: small;
 }
@@ -28,6 +29,42 @@
   font-size: large;
 }
 
+/* Buttons */
+.button_defaultsize{
+  width: var(--small-button-size);
+  height: var(--small-button-size);
+}
+
+.button_mediumsize{
+  width: var(--medium-button-size);;
+  height: var(--medium-button-size);
+}
+
+.button_bigsize{
+  width: var(--big-button-size);
+  height: var(--big-button-size);
+}
+
+/* Sidenav */
+/* NOT NEEDED ANYMORE */
+/* .sidenav .svg_default{
+  width: 21px;
+  height: 21px;
+  float: left;
+}
+
+.sidenav .svg_medium{
+  width: 31px;
+  height: 31px;
+  float: left;
+} */
+
+.sidenav .svg_big{
+  /* width: 41px; */
+  height: 100%;
+  float: left;
+}
+
 
 /* Extra small devices (phones, 600px and down)
 @media only screen and (max-width: 600px) {...}*/
@@ -37,6 +74,9 @@
 
 /*Medium devices (landscape tablets, 768px and up)
 @media only screen and (min-width: 768px) {...}*/
+@media only screen and (max-width: 768px) {
+  
+}
 
 /*Large devices (laptops/desktops, 992px and up)
 @media only screen and (min-width: 992px) {...}*/

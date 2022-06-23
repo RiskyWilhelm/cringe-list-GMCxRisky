@@ -127,20 +127,6 @@ svg{
   background-color:#43475080;
 }
 
-.button_defaultsize{
-  width: var(--small-button-size);
-  height: var(--small-button-size);
-}
-
-.button_mediumsize{
-  width: var(--medium-button-size);;
-  height: var(--medium-button-size);
-}
-
-.button_bigsize{
-  width: var(--big-button-size);
-  height: var(--big-button-size);
-}
 
 /* ---------------------------- TOP NAVBAR START ----------------------- */
 
@@ -208,7 +194,7 @@ svg{
 
 /* @media only screen and (max-width: 768px) {
   .topnav .search-container {
-    float: none;
+    left: 10%;
   }
 } */
 
@@ -292,25 +278,8 @@ svg{
 }
 
 .sidenav-expandinside .text{
-  opacity: 1;
-}
-
-.sidenav .svg_default{
-  width: 21px;
-  height: 21px;
-  float: left;
-}
-
-.sidenav .svg_medium{
-  width: 31px;
-  height: 31px;
-  float: left;
-}
-
-.sidenav .svg_big{
-  width: 41px;
-  height: 41px;
-  float: left;
+  /* opacity: 1; */
+  visibility: visible;
 }
 
 /* INITIALIZE TEXTAREAS */
@@ -346,7 +315,7 @@ svg{
   row-gap: 10px;
   margin-left: var(--align-relatives-fromsidenav);
   width: calc(100vw - var(--align-relatives-fromsidenav));
-  height: calc(100% - (var(--align-relatives-fromtopnav)));
+  height: calc(100vh - (var(--align-relatives-fromtopnav)));
 }
 
 #cl_addnotearea
@@ -416,22 +385,9 @@ svg{
   width: 360px;
 }
 
-/* .cl_note-title::after{
-  position: absolute;
-  content: "";
-  height: 2px;
-  width: 360px;
-  margin-left: 15px;
-  left: 0;
-  top: 60px;
-  border-top: 1px solid #454c5c;
-  border-radius: 20px;
-} */
-
 .cl_note-message{
   /* Need to set an variable for that. */
   width: 360px;
-  /* overflow: hidden; */
   border-top: 1px solid #454c5c;
 }
 
@@ -450,22 +406,3 @@ svg{
   display: none;
   opacity: 0;
 }
-
-
-
-
-
-  /* Extra small devices (phones, 600px and down)
-@media only screen and (max-width: 600px) {...}*/
-
- /*Small devices (portrait tablets and large phones, 600px and up)
-@media only screen and (min-width: 600px) {...}*/
-
- /*Medium devices (landscape tablets, 768px and up)
-@media only screen and (min-width: 768px) {...}*/
-
- /*Large devices (laptops/desktops, 992px and up)
-@media only screen and (min-width: 992px) {...}*/
-
- /*Extra large devices (large laptops and desktops, 1200px and up)
-@media only screen and (min-width: 1200px) {...}*/
