@@ -136,7 +136,8 @@ window.onload=function(){
     noteattritubes[3] = $('#cl_note-' + lastnote);
     noteattritubes[3] = document.getElementById('cl_note-' + lastnote);
     $(noteattritubes[2]).find('textarea').each(function(){
-      autogrow(this);
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
     });
 
     // Set note height and make them animateable!
@@ -176,11 +177,11 @@ window.onload=function(){
   }
 
   function autogrow(elem){
-    currentSelection = $(elem).closest('.cl_note');
-    if(currentSelection.length > 0 && currentSelection.height() != dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-cl_note-0' }))
+    var noteitem = $(elem).closest('.cl_note'), dummyitem = dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-' + noteitem.attr('id') });
+    if(noteitem.length > 0 && ((noteitem.outerHeight() + notegap) + 'px') != dummyitem.style.height)
     {
-      console.log("last heights(dummy, textarea): ", currentSelection.height(), dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-cl_note-0' }));
-      console.log("FOUND AT ", currentSelection);
+      dummyitem.style.height = (noteitem.outerHeight() + notegap) + 'px';
+      // console.log("last heights(dummy, textarea): ", ((currentSelection.outerHeight() + notegap) + 'px'), dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-cl_note-0' }).style.height);
     }
     elem.style.height = 'auto';
     elem.style.height = (elem.scrollHeight) + 'px';
