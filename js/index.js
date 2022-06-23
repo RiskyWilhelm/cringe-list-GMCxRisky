@@ -149,18 +149,7 @@ window.onload=function(){
 
     // Put it on right area
     setTimeout(function(){
-      dummyList.forEach(function(dummyDiv) {
-        var item = dummyDiv['__' + targetClassName + '_pair'];
-        var duration = dummyDiv['__' + targetClassName + '_duration'];
-        if (item.offsetTop != dummyDiv.offsetTop) {
-          item.style.transition = 'all ' + duration;
-          item.style.top = dummyDiv.offsetTop + 'px';
-          item.style.left = dummyDiv.offsetLeft + 'px';
-        } else {
-          item.style.transition = '';
-          item.style.left = dummyDiv.offsetLeft + 'px';
-        }
-      });
+      reorderNotes();
     }, 50);
 
 
@@ -181,6 +170,7 @@ window.onload=function(){
     if(noteitem.length > 0 && ((noteitem.outerHeight() + notegap) + 'px') != dummyitem.style.height)
     {
       dummyitem.style.height = (noteitem.outerHeight() + notegap) + 'px';
+      reorderNotes();
       // console.log("last heights(dummy, textarea): ", ((currentSelection.outerHeight() + notegap) + 'px'), dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-cl_note-0' }).style.height);
     }
     elem.style.height = 'auto';
@@ -237,7 +227,7 @@ window.onload=function(){
     }
   }
 
-  window.addEventListener('resize', function(event) {
+  function reorderNotes(){
     dummyList.forEach(function(dummyDiv) {
       var item = dummyDiv['__' + targetClassName + '_pair'];
       var duration = dummyDiv['__' + targetClassName + '_duration'];
@@ -250,6 +240,10 @@ window.onload=function(){
         item.style.left = dummyDiv.offsetLeft + 'px';
       }
     });
+  }
+
+  window.addEventListener('resize', function(event) {
+    reorderNotes();
     clearTimeout(timeout_resizeTextInitialization);
     timeout_resizeTextInitialization = setTimeout(function(){
       $('textarea').each(function() {
