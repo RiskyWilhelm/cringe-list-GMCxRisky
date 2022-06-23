@@ -259,10 +259,10 @@ window.onload=function(){
   }
 
   window.addEventListener('resize', function(event) {
-    reorderNotes();
     clearTimeout(timeout_resizeTextInitialization);
     timeout_resizeTextInitialization = setTimeout(function(){
       setDisplayMode();
+      reorderNotes();
       $('textarea').each(function() {
         if($(this).val().length > 0)
         {
@@ -272,6 +272,7 @@ window.onload=function(){
       });
       console.log("Texts resized as window size!");
     }, 150);
+    reorderNotes();
   });
 
   function setDisplayMode(){
@@ -283,6 +284,7 @@ window.onload=function(){
 
     switch(getRootAttr("--device-model"))
     {
+      // Will set note sizes on small devices. Like 100 or 50px is enough. LETS GO
       case 'extrasmall':
         setRootAttr("--align-relatives-fromsidenav", '0');
       break;
