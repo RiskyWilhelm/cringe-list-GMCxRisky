@@ -43,6 +43,7 @@ window.onclick=function(e){
 }
 
 window.onload=function(){
+  setDisplayMode();
   $("#cl_menu").click(function(e){
     // Basit bir taktikle c++ projelerimden ogrendigim bir toggle taktigini uyguladım. Ancak else yerine else if kullanılmalı ki targetin bu bizim menu oldugunu kanıtlayalım.
     if($(this).attr("is-expanded") == "false")
@@ -51,14 +52,22 @@ window.onload=function(){
       $(this).attr("is-expanded", "true");
       $('#cl_sidenav').find(".cl_button").addClass("sidenav-expandinside");
       // Root elementini alıyoruz. Documentelement bu yuzden kullandık.
-      document.documentElement.style.setProperty("--align-relatives-fromsidenav", (getComputedStyle(document.documentElement).getPropertyValue("--sidebar-expanded-big")));
+      // document.documentElement.style.setProperty("--align-relatives-fromsidenav", (getComputedStyle(document.documentElement).getPropertyValue("--sidebar-expanded-big")));
+      if(['desktop'].indexOf(getRootAttr("--device-model")) >= 0){
+        setRootAttr("--align-relatives-fromsidenav", getRootAttr("--sidebar-expanded-big"));
+        reorderNotes();
+      }
     }
     else if($(this).has(e.target))
     {
       $('#cl_sidenav').removeClass("sidenav-expanded");
       $(this).attr("is-expanded", "false");
       $('#cl_sidenav').find(".cl_button").removeClass("sidenav-expandinside");
-      document.documentElement.style.setProperty("--align-relatives-fromsidenav", (getComputedStyle(document.documentElement).getPropertyValue("--big-button-size")));
+      // document.documentElement.style.setProperty("--align-relatives-fromsidenav", (getComputedStyle(document.documentElement).getPropertyValue("--big-button-size")));
+      if(['desktop'].indexOf(getRootAttr("--device-model")) >= 0){
+        setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
+        reorderNotes();
+      }
     }
   });
 
@@ -155,6 +164,14 @@ window.onload=function(){
     lastnote++;
   });
 
+  function setRootAttr(txt1, txt2){
+    document.documentElement.style.setProperty(txt1, txt2);
+  }
+
+  function getRootAttr(txt1){
+    return getComputedStyle(document.documentElement).getPropertyValue(txt1);
+  }
+
   function checkifEmpty(elem)
   {
     if(!($(elem).val()))
@@ -245,6 +262,7 @@ window.onload=function(){
     reorderNotes();
     clearTimeout(timeout_resizeTextInitialization);
     timeout_resizeTextInitialization = setTimeout(function(){
+      setDisplayMode();
       $('textarea').each(function() {
         if($(this).val().length > 0)
         {
@@ -256,6 +274,36 @@ window.onload=function(){
     }, 150);
   });
 
+  function setDisplayMode(){
+    var windowsize = $(window).width();
+    (windowsize <= 600) ? setRootAttr('--device-model', 'extrasmall') :
+    (windowsize <= 768) ? setRootAttr('--device-model', 'small') :
+    (windowsize <= 992) ? setRootAttr('--device-model', 'medium') :
+    (windowsize <= 1200) ? setRootAttr('--device-model', 'large') : setRootAttr('--device-model', 'desktop');
+
+    switch(getRootAttr("--device-model"))
+    {
+      case 'extrasmall':
+        setRootAttr("--align-relatives-fromsidenav", '0');
+      break;
+
+      case 'small':
+        setRootAttr("--align-relatives-fromsidenav", '0');
+      break;
+
+      case 'medium':
+        setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
+      break;
+
+      case 'large':
+        setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
+      break;
+
+      case 'desktop':
+        setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
+      break;
+    }
+  }
 
   // Initialize no enter in components like text inputs
   $('.noEnter').keydown(function(e) {
@@ -266,6 +314,7 @@ window.onload=function(){
   $('textarea').on('input paste change', function(){
     autogrow(this);
   });
+
 
   console.log("Animation Initialization: Success");
 }

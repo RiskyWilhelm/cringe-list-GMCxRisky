@@ -38,9 +38,10 @@ body {
 }
 
 ::-webkit-scrollbar {
+  display: none;
   height: 15px;
   width: 15px;
-  overflow: visible;
+  /* overflow: visible; */
 }
 
 ::-webkit-scrollbar-thumb {
@@ -398,11 +399,47 @@ svg{
     text-align: center;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    /* Dont delete this. Some browsers cant see overflow overlay so it will enable scroll instead */
     overflow-y: scroll;
+    /* overflow-y: overlay; */
+
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
 }
+
+/* .container::-webkit-scrollbar { */
+    /* display: none;  /* Safari and Chrome */ */
+/* } */
 
 .hide{
   display: none;
   opacity: 0;
 }
+
+
+
+/* Extra small devices (phones, 600px and down)
+@media only screen and (max-width: 600px) {...}*/
+
+/*Small devices (portrait tablets and large phones, 600px and up)
+@media only screen and (min-width: 600px) {...}*/
+
+/*Medium devices (landscape tablets, 768px and up)
+@media only screen and (min-width: 768px) {...}*/
+@media only screen and (max-width: 768px) {
+  .sidenav {
+    width: 0;
+  }
+
+  .sidenav-expanded{
+    width: var(--sidebar-expanded-big);
+  }
+}
+
+/*Large devices (laptops/desktops, 992px and up)
+@media only screen and (min-width: 992px) {...}*/
+
+
+/*Extra large devices (large laptops and desktops, 1200px and up)
+@media only screen and (min-width: 1200px) {...}*/
