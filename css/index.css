@@ -111,7 +111,7 @@ svg{
   line-height: 0px;
   float: right;
   transition: opacity 500ms;
-  font-size: medium;
+  /* font-size: medium; */
 }
 
 .horizontal_content{
@@ -195,7 +195,7 @@ svg{
   background-color: rgba(255, 255, 255, 0);
   color: white;
   border-style: none;
-  font-size:medium;
+  /* font-size:medium; */
   outline: none;
   cursor: text;
 }
@@ -503,8 +503,8 @@ svg{
   :root {
 
     --small-button-size: 30px;
-    --medium-button-size: 45px;
-    --big-button-size: 55px;
+    --medium-button-size: 40px;
+    --big-button-size: 50px;
     /* 45 55 65 */
 
     --topnav-size: 55px;
@@ -513,6 +513,23 @@ svg{
     /* Bottom one gonna be used for mobile */
     --sidebar-expanded-small: 250px;
 
+  }
+
+  body{
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Font sizes */
+  .font-small{
+    font-size: x-small;
+  }
+
+  .font-medium{
+    font-size: small;
+  }
+
+  .font-large{
+    font-size: medium;
   }
 
   /* Buttons */

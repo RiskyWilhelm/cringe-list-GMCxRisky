@@ -193,9 +193,11 @@ window.onload=function(){
   }
 
   function autogrow(elem){
+    // Can be found with normal id too will develop soon IMPORTANT---------
     var noteitem = $(elem).closest('.cl_note'), dummyitem = dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-' + noteitem.attr('id') });
     if(noteitem.length > 0 && ((noteitem.outerHeight() + notegap) + 'px') != dummyitem.style.height)
     {
+      dummyitem.style.width = (noteitem.outerWidth() + notegap) + 'px';
       dummyitem.style.height = (noteitem.outerHeight() + notegap) + 'px';
       reorderNotes();
       // console.log("last heights(dummy, textarea): ", ((currentSelection.outerHeight() + notegap) + 'px'), dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-cl_note-0' }).style.height);
@@ -225,6 +227,7 @@ window.onload=function(){
       dummyDiv.style.height = rect.height + notegap + 'px';
       dummyDiv.style.visibility = 'hidden';
 
+      dummyDiv.id = 'dummy-' + item.id;
       dummyDiv['__' + targetClassName + '_height'] = dummyDiv.style.height;
       dummyDiv['__' + targetClassName + '_id'] = 'dummy-' + item.id;
       dummyDiv['__' + targetClassName + '_pair'] = item;
@@ -273,14 +276,13 @@ window.onload=function(){
     clearTimeout(timeout_resizeTextInitialization);
     timeout_resizeTextInitialization = setTimeout(function(){
       setDisplayMode();
-      reorderNotes();
-      $('textarea').each(function() {
-        if($(this).val().length > 0)
-        {
-          this.style.height = 'auto';
-          this.style.height = (this.scrollHeight) + 'px';
-        }
+
+      $('.cl_note').each(function(){
+        dummyList[] = $(this).attr('id')
       });
+
+      reorderNotes();
+
       console.log("Texts resized as window size!");
     }, 150);
     reorderNotes();
@@ -316,6 +318,11 @@ window.onload=function(){
         setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
       break;
     }
+
+    $('textarea').each(function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
   }
 
   // Initialize no enter in components like text inputs
