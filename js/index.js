@@ -194,16 +194,23 @@ window.onload=function(){
 
   function autogrow(elem){
     // Can be found with normal id too will develop soon IMPORTANT---------
-    var noteitem = $(elem).closest('.cl_note'), dummyitem = dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-' + noteitem.attr('id') });
+    // var noteitem = $(elem).closest('.cl_note'), dummyitem = dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-' + noteitem.attr('id') });
+    // if(noteitem.length > 0 && ((noteitem.outerHeight() + notegap) + 'px') != dummyitem.style.height)
+    // {
+    //   dummyitem.style.width = (noteitem.outerWidth() + notegap) + 'px';
+    //   dummyitem.style.height = (noteitem.outerHeight() + notegap) + 'px';
+    //   reorderNotes();
+    // }
+
+    elem.style.height = 'auto';
+    elem.style.height = (elem.scrollHeight) + 'px';
+    var noteitem = $(elem).closest('.cl_note'), dummyitem = document.getElementById('dummy-' + noteitem.attr('id'));
     if(noteitem.length > 0 && ((noteitem.outerHeight() + notegap) + 'px') != dummyitem.style.height)
     {
       dummyitem.style.width = (noteitem.outerWidth() + notegap) + 'px';
       dummyitem.style.height = (noteitem.outerHeight() + notegap) + 'px';
-      reorderNotes();
-      // console.log("last heights(dummy, textarea): ", ((currentSelection.outerHeight() + notegap) + 'px'), dummyList.find((e) => { return e['__flex-wrap-anim_id'] === 'dummy-cl_note-0' }).style.height);
     }
-    elem.style.height = 'auto';
-    elem.style.height = (elem.scrollHeight) + 'px';
+    reorderNotes();
   }
 
 
@@ -229,7 +236,7 @@ window.onload=function(){
 
       dummyDiv.id = 'dummy-' + item.id;
       dummyDiv['__' + targetClassName + '_height'] = dummyDiv.style.height;
-      dummyDiv['__' + targetClassName + '_id'] = 'dummy-' + item.id;
+      // dummyDiv['__' + targetClassName + '_id'] = 'dummy-' + item.id; TO FIND THE DUMMY DIV IN LIST SECOND WAY
       dummyDiv['__' + targetClassName + '_pair'] = item;
       dummyDiv['__' + targetClassName + '_duration'] = duration;
       //item.parentNode.appendChild(dummyDiv);
@@ -276,11 +283,6 @@ window.onload=function(){
     clearTimeout(timeout_resizeTextInitialization);
     timeout_resizeTextInitialization = setTimeout(function(){
       setDisplayMode();
-
-      $('.cl_note').each(function(){
-        dummyList[] = $(this).attr('id')
-      });
-
       reorderNotes();
 
       console.log("Texts resized as window size!");
@@ -298,24 +300,33 @@ window.onload=function(){
     switch(getRootAttr("--device-model"))
     {
       // Will set note sizes on small devices. Like 100 or 50px is enough. LETS GO
+      // <=600
       case 'extrasmall':
         setRootAttr("--align-relatives-fromsidenav", '0');
       break;
 
+      // <=768
       case 'small':
         setRootAttr("--align-relatives-fromsidenav", '0');
       break;
 
+      // <= 992
       case 'medium':
         setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
       break;
 
+      // <=1200
       case 'large':
         setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
       break;
 
+      // > 1200
       case 'desktop':
         setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
+        // setRootAttr("--note-width", '400px');
+        // $('.cl_note').each(function(){
+        //   $('dummy-' + $(this).attr('id')).width(getRootAttr("--big-button-size"));
+        // });
       break;
     }
 

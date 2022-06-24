@@ -25,6 +25,7 @@ SMALL HEIGHT OF BUTTONS : 40px
   --align-relatives-fromsidenav: 65px;
   /* First note's height or first one of the 6 note's maximum height need to set to here. */
   --notes-totalnoteheight: 136px;
+  /* Default note width will be 400px  */
   --note-width: 400px;
 }
 
@@ -470,7 +471,6 @@ svg{
     --sidebar-expanded-big: 250px;
     /* Bottom one gonna be used for mobile */
     --sidebar-expanded-small: 250px;
-
   }
 
   .sidenav {
@@ -481,10 +481,6 @@ svg{
 
   .sidenav-expanded{
     width: var(--sidebar-expanded-big);
-  }
-
-  .cl_note{
-    width: 200px;
   }
 
   .button_mobilepadding{
