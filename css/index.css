@@ -6,6 +6,29 @@ SMALL HEIGHT OF BUTTONS : 40px
 */
 
 
+
+:root {
+  --device-model: 'desktop';
+  --darkmode-text-color: #6495ed;
+
+  --small-button-size: 45px;
+  --medium-button-size: 55px;
+  --big-button-size: 65px;
+
+  --topnav-size: 65px;
+
+  --sidebar-expanded-big: 250px;
+  /* Bottom one gonna be used for mobile */
+  --sidebar-expanded-small: 250px;
+
+  --align-relatives-fromtopnav: calc(var(--big-button-size) + 1px);
+  --align-relatives-fromsidenav: 65px;
+  /* First note's height or first one of the 6 note's maximum height need to set to here. */
+  --notes-totalnoteheight: 136px;
+  --note-width: 400px;
+}
+
+
 /* :root {
   --darkmode-text-color: #6495ed;
 
@@ -62,7 +85,7 @@ svg{
 }
 
 .make_sticky-vertical{
-  top: calc(var(--big-button-size) + 1px);
+  /* top: calc(var(--big-button-size) + 1px); */
 
   position: fixed;
 }
@@ -133,13 +156,14 @@ svg{
 
 .topnav {
     /* background-color: #282c34; */
-    z-index: 999;
+    z-index: 1;
     background-color: #16191f;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content:space-between;
     border-bottom: 1px solid #282c34;
+    height: var(--topnav-size);
 }
 
 /* .topnav a {
@@ -309,6 +333,7 @@ svg{
   /* ADDITIONAL POSITION SET */
   position: relative;
   display:grid;
+  /* Note height bug fixed by adding 0 at second area. So everything goes in background. */
   grid-auto-rows: minmax(150px, max-content) 0;
   grid-auto-flow: row;
   /* MAYBE IT CAN WORK grid-template-columns: calc(100vw - var(--align-relatives-fromsidenav)); */
@@ -384,12 +409,12 @@ svg{
 
 .cl_note-title{
   /* Need to set an variable for that. */
-  width: 360px;
+  width: var(--note-width) - 40px;
 }
 
 .cl_note-message{
   /* Need to set an variable for that. */
-  width: 360px;
+  width: var(--note-width) - 40px;
   border-top: 1px solid #454c5c;
 }
 
@@ -429,13 +454,35 @@ svg{
 /*Medium devices (landscape tablets, 768px and up)
 @media only screen and (min-width: 768px) {...}*/
 @media only screen and (max-width: 768px) {
+  :root {
+
+    --small-button-size: 40px;
+    --medium-button-size: 50px;
+    --big-button-size: 55px;
+
+    --topnav-size: 65px;
+
+    --sidebar-expanded-big: 250px;
+    /* Bottom one gonna be used for mobile */
+    --sidebar-expanded-small: 250px;
+
+  }
+
   .sidenav {
     width: 0;
+    top: 0;
+    height: 100vh;
   }
 
   .sidenav-expanded{
     width: var(--sidebar-expanded-big);
   }
+
+  .cl_note{
+    width: 100px;
+  }
+
+
 }
 
 /*Large devices (laptops/desktops, 992px and up)

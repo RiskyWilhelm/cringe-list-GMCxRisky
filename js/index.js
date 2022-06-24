@@ -48,6 +48,9 @@ window.onload=function(){
     // Basit bir taktikle c++ projelerimden ogrendigim bir toggle taktigini uyguladım. Ancak else yerine else if kullanılmalı ki targetin bu bizim menu oldugunu kanıtlayalım.
     if($(this).attr("is-expanded") == "false")
     {
+      // For mobile
+      if(['extrasmall', 'small', 'medium'].indexOf(getRootAttr("--device-model")) >= 0) $("#cl_sidenav").focus();
+
       $('#cl_sidenav').addClass("sidenav-expanded");
       $(this).attr("is-expanded", "true");
       $('#cl_sidenav').find(".cl_button").addClass("sidenav-expandinside");
@@ -83,6 +86,16 @@ window.onload=function(){
     }
   });
 
+
+  $('#cl_sidenav').focusout(function(e){
+    if($('#cl_menu').attr("is-expanded") == "true" && ['extrasmall', 'small', 'medium'].indexOf(getRootAttr("--device-model")) >= 0)
+    {
+      $('#cl_sidenav').removeClass("sidenav-expanded");
+      $('#cl_menu').attr("is-expanded", "false");
+      $('#cl_sidenav').find(".cl_button").removeClass("sidenav-expandinside");
+    }
+  });
+
 // Addnote area Animations!
   $('#cl_addnote-titletext').focus(function(){
     if((checkifEmpty('#cl_addnote-messagetext') && checkifEmpty('#cl_addnote-titletext')))
@@ -112,8 +125,6 @@ window.onload=function(){
       }
     }, 100);
   });
-
-
 
   $('#cl_addnote-messagetext').focusout(function()
   {
