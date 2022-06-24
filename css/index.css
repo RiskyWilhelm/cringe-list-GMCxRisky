@@ -248,7 +248,7 @@ svg{
 .personal-account{
   overflow: hidden;
   border-radius: 50%;
-  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 1);
+  transition: border 500ms cubic-bezier(0, 0.110, 0.35, 1);
   border: 1px solid rgba(255, 0, 0, 0);
 }
 
@@ -456,9 +456,10 @@ svg{
 @media only screen and (max-width: 768px) {
   :root {
 
-    --small-button-size: 40px;
-    --medium-button-size: 50px;
+    --small-button-size: 35px;
+    --medium-button-size: 45px;
     --big-button-size: 55px;
+    /* 45 55 65 */
 
     --topnav-size: 65px;
 
@@ -479,14 +480,41 @@ svg{
   }
 
   .cl_note{
-    width: 100px;
+    width: 200px;
   }
 
-
+  .button_mobilepadding{
+    padding: 6px;
+  }
 }
 
 /*Large devices (laptops/desktops, 992px and up)
 @media only screen and (min-width: 992px) {...}*/
+
+@media only screen and (max-width: 600px){
+  :root {
+
+    --small-button-size: 25px;
+    --medium-button-size: 35px;
+    --big-button-size: 45px;
+    /* 45 55 65 */
+
+    --topnav-size: 65px;
+
+    --sidebar-expanded-big: 250px;
+    /* Bottom one gonna be used for mobile */
+    --sidebar-expanded-small: 250px;
+
+  }
+
+  .button_mobilepadding{
+    padding: 4px;
+  }
+
+  .cl_button{
+    padding: 6px;
+  }
+}
 
 
 /*Extra large devices (large laptops and desktops, 1200px and up)

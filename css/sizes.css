@@ -29,6 +29,11 @@
   height: var(--big-button-size);
 }
 
+.button_mobilepadding{
+  /* 4px should be okey */
+  padding: 2px;
+}
+
 /* Sidenav */
 /* NOT NEEDED ANYMORE */
 /* .sidenav .svg_default{
