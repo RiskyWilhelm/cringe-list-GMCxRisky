@@ -443,6 +443,10 @@ svg{
   opacity: 0;
 }
 
+.show-mobile{
+  display: none;
+}
+
 
 
 /* Extra small devices (phones, 600px and down)
@@ -486,6 +490,10 @@ svg{
   .button_mobilepadding{
     padding: 6px;
   }
+
+  .show-mobile{
+    display: block;
+  }
 }
 
 /*Large devices (laptops/desktops, 992px and up)
@@ -494,12 +502,12 @@ svg{
 @media only screen and (max-width: 600px){
   :root {
 
-    --small-button-size: 25px;
-    --medium-button-size: 35px;
-    --big-button-size: 45px;
+    --small-button-size: 30px;
+    --medium-button-size: 45px;
+    --big-button-size: 55px;
     /* 45 55 65 */
 
-    --topnav-size: 65px;
+    --topnav-size: 55px;
 
     --sidebar-expanded-big: 250px;
     /* Bottom one gonna be used for mobile */
@@ -507,12 +515,28 @@ svg{
 
   }
 
+  /* Buttons */
+
   .button_mobilepadding{
     padding: 4px;
   }
 
-  .cl_button{
-    padding: 6px;
+  .hide-mobile{
+    display: none;
+  }
+
+  /* Topnav */
+  .search-container {
+    left: var(--big-button-size);
+    width: calc(100vw - var(--big-button-size));
+    transform: translate(0, 0);
+  }
+
+  #cl_search-input_text{
+    text-align: left;
+    width: 100%;
+    border-bottom:none;
+    /* transition: font-size 500ms cubic-bezier(0, 0.110, 0.35, 2); */
   }
 }
 

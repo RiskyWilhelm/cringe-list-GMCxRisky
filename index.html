@@ -12,7 +12,7 @@
     <div id='cl_main' class="container">
         <div class="topnav make_sticky" id="cl_topnav">
           <!-- Top left menu -->
-            <div class="topnav_content">
+            <div id="cl_menu-leftbuttons" class="topnav_content">
                 <!-- MENU BUTTON -->
                 <div id="cl_menu" class="cl_button button_hover button_bigsize" tabindex="0" is-expanded="false">
                         <svg focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -24,10 +24,10 @@
           <!-- Top left menu END -->
 
           <!-- Top middle menu -->
-            <div class="topnav_content">
+            <div id="cl_menu-searchbar" class="topnav_content">
                 <div class="search-container">
                     <input id="cl_search-input_text" class="input_text" type="text" placeholder="Search in your Cringe List">
-                    <button class="searcher cl_button button_hover button_defaultsize button_mobilepadding">
+                    <button class="searcher cl_button button_hover button_defaultsize button_mobilepadding hide-mobile">
                             <svg class="svg_small" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path transform="matrix(1, 0, 0, 1, -3, -1)"  d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z" fill="currentColor" />
                                 <path transform="matrix(1, 0, 0, 1, -3, -1)" d="M0,0h24v24H0V0z" fill="none"></path>
@@ -38,7 +38,7 @@
           <!-- Top middle menu END-->
 
           <!-- Top right menu -->
-            <div class="topnav_content">
+            <div id="cl_menu-rightbuttons" class="topnav_content hide-mobile">
                 <div class="cl_button button_hover button_mediumsize" tabindex="0">
                         <svg class="svg_big" fill="currentColor" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M 296.341113691 204.319 L 323.658886309 204.319 L 341.310976143 239.781544567 A 107.863 107.863 0 0 1 360.846266224 247.873326664 L 398.403984389 235.279433346 L 417.720566654 254.596015611 L 405.126673336 292.153733776 A 107.863 107.863 0 0 1 413.218455433 311.689023857 L 448.681 329.341113691 L 448.681 356.658886309 L 413.218455433 374.310976143 A 107.863 107.863 0 0 1 405.126673336 393.846266224 L 417.720566654 431.403984389 L 398.403984389 450.720566654 L 360.846266224 438.126673336 A 107.863 107.863 0 0 1 341.310976143 446.218455433 L 323.658886309 481.681 L 296.341113691 481.681 L 278.689023857 446.218455433 A 107.863 107.863 0 0 1 259.153733776 438.126673336 L 221.596015611 450.720566654 L 202.279433346 431.403984389 L 214.873326664 393.846266224 A 107.863 107.863 0 0 1 206.781544567 374.310976143 L 171.319 356.658886309 L 171.319 329.341113691 L 206.781544567 311.689023857 A 107.863 107.863 0 0 1 214.873326664 292.153733776 L 202.279433346 254.596015611 L 221.596015611 235.279433346 L 259.153733776 247.873326664 A 107.863 107.863 0 0 1 278.689023857 239.781544567 Z M 310 273.659 A 69.341 69.341 0 0 0 310 412.341 A 69.341 69.341 0 0 0 310 273.659" transform="matrix(0.064897, 0, 0, 0.064897, -8.118073, -10.259675)"></path>
@@ -53,6 +53,11 @@
 
         <div id="cl_sidenav" tabindex="0" class="sidenav make_sticky-vertical">
             <div class="vertical_content">
+                <dl class="show-mobile" style="width: 250px; align-self: self-end; text-align: left;">
+                  <dt>Cringe List</dt>
+                  <dd style="margin-left: 10px;">ClipsNRisky</dd>
+                </dl>
+
                 <div class="cl_button button_hover button_bigsize align_toleft" tabindex="0" is-expanded="false">
                         <svg class="svg_big" focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" ></path>
@@ -78,7 +83,7 @@
 
                 <div id="cl_addnote-message" class="vertical_content cl_addnote-content hide">
                   <textarea id="cl_addnote-messagetext" class="input_text cl_textarea" placeholder="The width of cl_addnote is set to 70% for now. it must have some media queries" maxlength="400" style="padding:0 15px;"></textarea>
-                    <div id="cl_addnote-button" class="cl_button button_hover button_defaultsize" tabindex="0" is-expanded="false">
+                    <div id="cl_addnote-button" class="cl_button button_hover button_defaultsize button_mobilepadding" tabindex="0" is-expanded="false">
                       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill="currentColor" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"/>
                         <path fill="currentColor" d="M13 7C13 6.44772 12.5523 6 12 6C11.4477 6 11 6.44772 11 7V11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H11V17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17V13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11H13V7Z"/>
