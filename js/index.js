@@ -43,13 +43,13 @@ window.onclick=function(e){
 }
 
 window.onload=function(){
-  setDisplayMode();
   $("#cl_menu").click(function(e){
     // Basit bir taktikle c++ projelerimden ogrendigim bir toggle taktigini uyguladım. Ancak else yerine else if kullanılmalı ki targetin bu bizim menu oldugunu kanıtlayalım.
     if($(this).attr("is-expanded") == "false")
     {
       // For mobile
-      if(['extrasmall', 'small', 'medium'].indexOf(getRootAttr("--device-model")) >= 0) $("#cl_sidenav").focus();
+      // if(['xxx-small', 'extrasmall', 'small', 'medium'].indexOf(getRootAttr("--device-model")) >= 0) $("#cl_sidenav").focus();
+      $("#cl_sidenav").focus();
 
       $('#cl_sidenav').addClass("sidenav-expanded");
       $(this).attr("is-expanded", "true");
@@ -63,6 +63,7 @@ window.onload=function(){
     }
     else if($(this).has(e.target))
     {
+      console.log("false");
       $('#cl_sidenav').removeClass("sidenav-expanded");
       $(this).attr("is-expanded", "false");
       $('#cl_sidenav').find(".cl_button").removeClass("sidenav-expandinside");
@@ -88,7 +89,7 @@ window.onload=function(){
 
 
   $('#cl_sidenav').focusout(function(e){
-    if($('#cl_menu').attr("is-expanded") == "true" && ['extrasmall', 'small', 'medium'].indexOf(getRootAttr("--device-model")) >= 0)
+    if($('#cl_menu').attr("is-expanded") == "true" && ['xxx-small', 'extrasmall', 'small'].indexOf(getRootAttr("--device-model")) >= 0)
     {
       $('#cl_sidenav').removeClass("sidenav-expanded");
       $('#cl_menu').attr("is-expanded", "false");
@@ -207,7 +208,6 @@ window.onload=function(){
     var noteitem = $(elem).closest('.cl_note'), dummyitem = document.getElementById('dummy-' + noteitem.attr('id'));
     if(noteitem.length > 0 && ((noteitem.outerHeight() + notegap) + 'px') != dummyitem.style.height)
     {
-      dummyitem.style.width = (noteitem.outerWidth() + notegap) + 'px';
       dummyitem.style.height = (noteitem.outerHeight() + notegap) + 'px';
     }
     reorderNotes();
@@ -283,7 +283,6 @@ window.onload=function(){
     clearTimeout(timeout_resizeTextInitialization);
     timeout_resizeTextInitialization = setTimeout(function(){
       setDisplayMode();
-      reorderNotes();
 
       console.log("Texts resized as window size!");
     }, 150);
@@ -292,6 +291,7 @@ window.onload=function(){
 
   function setDisplayMode(){
     var windowsize = $(window).width();
+    (windowsize <= 425) ? setRootAttr('--device-model', 'xxx-small') :
     (windowsize <= 600) ? setRootAttr('--device-model', 'extrasmall') :
     (windowsize <= 768) ? setRootAttr('--device-model', 'small') :
     (windowsize <= 992) ? setRootAttr('--device-model', 'medium') :
@@ -300,40 +300,54 @@ window.onload=function(){
     switch(getRootAttr("--device-model"))
     {
       // Will set note sizes on small devices. Like 100 or 50px is enough. LETS GO
+
+      // Flex start would be cool with this
+      //  <= 425
+      case 'xxx-small':
+        setRootAttr("--note-width", (((windowsize/2)-(notegap*2))) + 'px');
+        setRootAttr("--align-relatives-fromsidenav", '0');
+      break;
+
       // <=600
       case 'extrasmall':
+        setRootAttr("--note-width", (((windowsize/2)-(notegap*2))) + 'px');
         setRootAttr("--align-relatives-fromsidenav", '0');
       break;
 
       // <=768
       case 'small':
+        setRootAttr("--note-width", (((windowsize/2)-(notegap*2))) + 'px');
         setRootAttr("--align-relatives-fromsidenav", '0');
       break;
 
       // <= 992
       case 'medium':
-        setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
+        setRootAttr("--note-width", (((windowsize/2)-(notegap*2)) - getRootAttr("--align-relatives-fromsidenav").substr(0, getRootAttr("--align-relatives-fromsidenav").length - 2)) + 'px');
+        // THE SIDENAV WILL BE HIDDEN IN MEDIUM TOO!
+        setRootAttr("--align-relatives-fromsidenav", getRootAttr('0'));
+
       break;
 
       // <=1200
       case 'large':
+        setRootAttr("--note-width", "400px");
         setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
       break;
 
       // > 1200
       case 'desktop':
+        setRootAttr("--note-width", "400px");
         setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
-        // setRootAttr("--note-width", '400px');
-        // $('.cl_note').each(function(){
-        //   $('dummy-' + $(this).attr('id')).width(getRootAttr("--big-button-size"));
-        // });
       break;
     }
 
-    $('textarea').each(function() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
+    $('.flex-wrap-anim-dummy').each(function() {
+      this.style.width = parseInt(getRootAttr("--note-width").substr(0, getRootAttr("--note-width").length - 2)) + notegap + 'px';
     });
+    $('textarea').each(function() {
+        autogrow(this);
+    });
+    reorderNotes();
   }
 
   // Initialize no enter in components like text inputs
@@ -346,6 +360,8 @@ window.onload=function(){
     autogrow(this);
   });
 
-
+  setTimeout(function () {
+    setDisplayMode();
+  }, 10);
   console.log("Animation Initialization: Success");
 }
