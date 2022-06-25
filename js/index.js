@@ -63,7 +63,6 @@ window.onload=function(){
     }
     else if($(this).has(e.target))
     {
-      console.log("false");
       $('#cl_sidenav').removeClass("sidenav-expanded");
       $(this).attr("is-expanded", "false");
       $('#cl_sidenav').find(".cl_button").removeClass("sidenav-expandinside");
@@ -89,7 +88,7 @@ window.onload=function(){
 
 
   $('#cl_sidenav').focusout(function(e){
-    if($('#cl_menu').attr("is-expanded") == "true" && ['xxx-small', 'extrasmall', 'small'].indexOf(getRootAttr("--device-model")) >= 0)
+    if($('#cl_menu').attr("is-expanded") == "true" && ['xxx-small', 'extrasmall', 'small', 'medium'].indexOf(getRootAttr("--device-model")) >= 0)
     {
       $('#cl_sidenav').removeClass("sidenav-expanded");
       $('#cl_menu').attr("is-expanded", "false");
@@ -202,7 +201,6 @@ window.onload=function(){
     //   dummyitem.style.height = (noteitem.outerHeight() + notegap) + 'px';
     //   reorderNotes();
     // }
-
     elem.style.height = 'auto';
     elem.style.height = (elem.scrollHeight) + 'px';
     var noteitem = $(elem).closest('.cl_note'), dummyitem = document.getElementById('dummy-' + noteitem.attr('id'));
@@ -324,7 +322,7 @@ window.onload=function(){
       case 'medium':
         setRootAttr("--note-width", (((windowsize/2)-(notegap*2)) - getRootAttr("--align-relatives-fromsidenav").substr(0, getRootAttr("--align-relatives-fromsidenav").length - 2)) + 'px');
         // THE SIDENAV WILL BE HIDDEN IN MEDIUM TOO!
-        setRootAttr("--align-relatives-fromsidenav", getRootAttr('0'));
+        setRootAttr("--align-relatives-fromsidenav", '0');
 
       break;
 
@@ -344,9 +342,12 @@ window.onload=function(){
     $('.flex-wrap-anim-dummy').each(function() {
       this.style.width = parseInt(getRootAttr("--note-width").substr(0, getRootAttr("--note-width").length - 2)) + notegap + 'px';
     });
-    $('textarea').each(function() {
-        autogrow(this);
-    });
+    setTimeout(function () {
+      $('textarea').each(function() {
+          autogrow(this);
+      });
+    }, 50);
+
     reorderNotes();
   }
 

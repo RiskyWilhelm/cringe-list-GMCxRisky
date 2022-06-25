@@ -456,6 +456,25 @@ svg{
 
 /*Small devices (portrait tablets and large phones, 600px and up)
 @media only screen and (min-width: 600px) {...}*/
+@media only screen and (max-width: 992px) {
+  .sidenav {
+    width: 0;
+    top: 0;
+    height: 100vh;
+  }
+
+  .sidenav-expanded{
+    width: var(--sidebar-expanded-big);
+  }
+
+  .button_mobilepadding{
+    padding: 6px;
+  }
+
+  .show-mobile{
+    display: block;
+  }
+}
 
 /*Medium devices (landscape tablets, 768px and up)
 @media only screen and (min-width: 768px) {...}*/
