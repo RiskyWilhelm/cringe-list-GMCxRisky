@@ -567,10 +567,12 @@ svg{
     position: absolute;
     width: calc(97vw - var(--big-button-size));
     background: rgba(43, 49, 62, 0.5);
-    transition: width 500ms, left 500ms;
+    border-radius: 40px;
+    transition: height 500ms, width 500ms, left 500ms;
   }
 
   .search-container:focus-within{
+    height: 50px;
     width: 95vw;
   }
 
