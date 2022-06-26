@@ -449,6 +449,10 @@ svg{
   display: none;
 }
 
+.show-mobile-smallest{
+  display: none;
+}
+
 
 
 /* Extra small devices (phones, 600px and down)
@@ -561,9 +565,7 @@ svg{
   /* Topnav */
   .search-container {
     position: absolute;
-    /* left: var(--big-button-size); */
     width: calc(97vw - var(--big-button-size));
-    /* transform: translate(0, 0); */
     background: rgba(43, 49, 62, 0.5);
     transition: width 500ms, left 500ms;
   }
@@ -572,6 +574,9 @@ svg{
     width: 95vw;
   }
 
+  .show-mobile-smallest{
+    display: block;
+  }
 
   #cl_menu{
     width: var(--small-button-size);
