@@ -560,9 +560,23 @@ svg{
 
   /* Topnav */
   .search-container {
-    left: var(--big-button-size);
-    width: calc(100vw - var(--big-button-size));
-    transform: translate(0, 0);
+    position: absolute;
+    /* left: var(--big-button-size); */
+    width: calc(97vw - var(--big-button-size));
+    /* transform: translate(0, 0); */
+    background: rgba(43, 49, 62, 0.5);
+    transition: width 500ms, left 500ms;
+  }
+
+  .search-container:focus-within{
+    width: 95vw;
+  }
+
+
+  #cl_menu{
+    width: var(--small-button-size);
+    height: var(--small-button-size);
+    background-color: transparent;
   }
 
   #cl_search-input_text{
