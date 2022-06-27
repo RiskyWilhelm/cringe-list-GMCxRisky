@@ -564,14 +564,18 @@ svg{
 
   /* Topnav */
   .search-container {
-    position: absolute;
+    position: relative;
     width: calc(97vw - var(--big-button-size));
     background: rgba(43, 49, 62, 0.5);
-    border-radius: 40px;
     transition: height 500ms, width 500ms, left 500ms;
   }
 
-  .search-container:focus-within{
+  /* .search-container:focus-within{
+    height: 50px;
+    width: 95vw;
+  } */
+  /* Used once */
+  .search-container-expanded-mobile{
     height: 50px;
     width: 95vw;
   }
@@ -581,9 +585,11 @@ svg{
   }
 
   #cl_menu{
+    transition: margin 500ms;
     width: var(--small-button-size);
     height: var(--small-button-size);
     background-color: transparent;
+    z-index: 1;
   }
 
   #cl_search-input_text{

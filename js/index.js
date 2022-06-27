@@ -1,5 +1,5 @@
 //
-// Code by Yunus Yıldız(Risky)
+// Code by Yunus Yıldız(Risky) JQUERY + PURE JS
 // ===========================================================================
 //
 // Note: If you put in onload, it not making the variable global. Instead, it becomes local.
@@ -53,7 +53,6 @@ createnotetemplate();
 
 window.onclick=function(e){
   clickedElement = e;
-  console.log($('#justatest'));
 }
 
 window.onload=function(){
@@ -85,6 +84,25 @@ window.onload=function(){
         setRootAttr("--align-relatives-fromsidenav", getRootAttr("--big-button-size"));
         reorderNotes();
       }
+    }
+  });
+
+  $('#cl_search-input_text').click(function(){
+    if(['xxx-small', 'extrasmall'].indexOf(getRootAttr("--device-model")) >= 0)
+    {
+      $(this).parent().attr('is-expanded', "true").addClass("search-container-expanded-mobile");
+      $('#cl_menu').css({'margin-left': '2vw'});
+      $('#cl_personal-account-mobile').css({'right': '104vw'});
+      window.location.hash = "#searchbar-activated";
+    }
+  });
+
+  //  Simple home back button for website :) its gonna be used to close the windows with home button.
+  window.addEventListener("hashchange", function(e) {
+    if(e.oldURL.length > e.newURL.length && ['xxx-small', 'extrasmall'].indexOf(getRootAttr("--device-model")) >= 0)
+    {
+      $('#cl_search-input_text').parent().attr('is-expanded', "false").removeClass("search-container-expanded-mobile");
+      $('#cl_menu').removeAttr('style');
     }
   });
 
